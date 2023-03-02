@@ -10,7 +10,6 @@ Material:
   m_Name: Road
   m_Shader: {fileID: 4800000, guid: f276502ebf8b1431192125b7316d5d67, type: 3}
   m_ValidKeywords:
-  - AO_ON_UV0
   - COLORCORRECTION_ON
   - LIGHTMAP_AO
   - SHADOW_ON

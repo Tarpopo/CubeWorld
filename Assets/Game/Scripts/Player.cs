@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using FSM;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,45 +7,78 @@ public class Player : MonoBehaviour
     [SerializeField] private float _rollDistance;
     [SerializeField] private float _angleOffset;
     [SerializeField] private float _rotationSpeed;
-    private PlayerInput _playerInput;
+    [SerializeField] private PlayerInput _playerInput;
+    private IMove _move;
+    private IRotateMove _rotateMove;
     private float _distToCam;
-    
+
     private Transform _transform;
     private Camera _camera;
     private Rigidbody _rigidBody;
     private Vector3 _beganPos;
     private Vector3 _moveDirection;
     private Vector3 _rayPos;
-    private  void Start()
+    private StateMachine _stateMachine;
+    private AnimationComponent _animationComponent;
+    private TriggerChecker<IResource> _resourceChecker;
+
+    private void Start()
     {
-        _playerInput = GetComponent<PlayerInput>();
-        _playerInput.OnMove += () =>
+        _resourceChecker = new TriggerChecker<IResource>();
+        _animationComponent = GetComponent<AnimationComponent>();
+        _move = GetComponent<IMove>();
+        _rotateMove = GetComponent<IRotateMove>();
+        _stateMachine = new StateMachine();
+        _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, _move, _rotateMove, transform, _speed,
+            _angleOffset));
+        _stateMachine.AddState(new Idle(_stateMachine));
+        _stateMachine.AddState(new PlayerAttack(_stateMachine, _animationComponent, _resourceChecker));
+        _playerInput.OnTouchDown += () =>
         {
-            _transform.rotation = Quaternion.AngleAxis(-_playerInput.Angle + _angleOffset, Vector3.up);
-            //_transform.RotateAround(transform.position,transform.up,-_playerInput.Angle + _angleOffset);
-            //_transform.rotation = Quaternion.AngleAxis(-_playerInput.Angle + _angleOffset, (transform.up).normalized);
-            //_transform.rotation = new Quaternion(0, -_playerInput.Angle + _angleOffset, 0, 0);
-            //Quaternion.AngleAxis(-_playerInput.Angle + _angleOffset, transform.up.normalized);
-            //_rigidBody.MovePosition(_rigidBody.position+transform.forward*_speed);
-            CheckGround();
+            _animationComponent.PlayAnimation(UnitAnimations.Run);
+            _stateMachine.ChangeState<PlayerMove>();
         };
-        _transform = transform;
-        _rigidBody = GetComponent<Rigidbody>();
-        _camera=Camera.main;
-    }
-
-    private void RotateToPlane()
-    {
-        transform.rotation*=Quaternion.Euler(90,0,0);
-    }
-
-    private void CheckGround()
-    {
-        if (Physics.Raycast(transform.position, -transform.up, 10) == false) 
+        _playerInput.OnTouchUp += () =>
         {
-            //RotateToPlane();
-            print("ground");
-        }
+            if (_resourceChecker.HaveElements)
+            {
+                _stateMachine.ChangeState<PlayerAttack>();
+                print("attack");
+            }
+            else
+            {
+                _animationComponent.PlayAnimation(UnitAnimations.Idle);
+                _stateMachine.ChangeState<Idle>();
+            }
+        };
+        _animationComponent.PlayAnimation(UnitAnimations.Idle);
+        _stateMachine.Initialize<Idle>();
     }
 
+    private void Update() => _stateMachine.CurrentState.LogicUpdate();
+
+    private void FixedUpdate() => _stateMachine.CurrentState.PhysicsUpdate();
+
+    private void OnTriggerEnter(Collider other)
+    {
+        _resourceChecker.OnTriggerEnter(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _resourceChecker.OnTriggerExit(other);
+    }
+    // private void RotateToPlane()
+    // {
+    //     transform.rotation *= Quaternion.Euler(90, 0, 0);
+    // }
+    //
+    // private void CheckGround()
+    // {
+    //     if (Physics.Raycast(transform.position, -transform.up, 10) == false)
+    //     {
+    //         //RotateToPlane();
+    //         print("ground");
+    //     }
+    // }
 }

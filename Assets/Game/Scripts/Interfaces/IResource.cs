@@ -1,0 +1,4 @@
+public interface IResource : IDamageable
+{
+    public ResourceType ResourceType { get; }
+}
