@@ -1,4 +1,5 @@
-﻿using FSM;
+﻿using System.Linq;
+using FSM;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -22,6 +23,21 @@ public class Player : MonoBehaviour
     private AnimationComponent _animationComponent;
     private TriggerChecker<IResource> _resourceChecker;
 
+    public void TryAttackResource()
+    {
+        if (_resourceChecker.HaveElements == false) return;
+        foreach (var resource in _resourceChecker.Elements)
+        {
+            resource.TakeDamage(1);
+        }
+
+        if (_resourceChecker.Elements.Any(resource => resource.CanMine) == false)
+        {
+            _animationComponent.PlayAnimation(UnitAnimations.Idle);
+            _stateMachine.ChangeState<Idle>();
+        }
+    }
+
     private void Start()
     {
         _resourceChecker = new TriggerChecker<IResource>();
@@ -40,7 +56,7 @@ public class Player : MonoBehaviour
         };
         _playerInput.OnTouchUp += () =>
         {
-            if (_resourceChecker.HaveElements)
+            if (_resourceChecker.HaveElements && _resourceChecker.Elements.Any(resource => resource.CanMine))
             {
                 _stateMachine.ChangeState<PlayerAttack>();
                 print("attack");
@@ -68,17 +84,4 @@ public class Player : MonoBehaviour
     {
         _resourceChecker.OnTriggerExit(other);
     }
-    // private void RotateToPlane()
-    // {
-    //     transform.rotation *= Quaternion.Euler(90, 0, 0);
-    // }
-    //
-    // private void CheckGround()
-    // {
-    //     if (Physics.Raycast(transform.position, -transform.up, 10) == false)
-    //     {
-    //         //RotateToPlane();
-    //         print("ground");
-    //     }
-    // }
 }
