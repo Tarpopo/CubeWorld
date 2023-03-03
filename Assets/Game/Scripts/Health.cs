@@ -1,11 +1,14 @@
 using System;
 
-public class Health
+public class Health : IHealth
 {
-    public event Action<int> OnReduceHealth;
-    public event Action<int> OnHealthAdded;
+    public event Action<int> OnReduceHealthInt;
+    public event Action OnReduceHealth;
+    public event Action<int> OnHealthAddedInt;
+    public event Action OnHealthAdded;
     public event Action OnHealthEnd;
     public int CurrentHealth { get; private set; }
+    public bool MaxHealth => CurrentHealth >= _maxHealth;
     private int _maxHealth;
 
     public Health(int maxHealth)
@@ -20,7 +23,8 @@ public class Health
     {
         if (CurrentHealth <= 0) return;
         CurrentHealth -= damage;
-        OnReduceHealth?.Invoke(CurrentHealth);
+        OnReduceHealthInt?.Invoke(CurrentHealth);
+        OnReduceHealth?.Invoke();
         if (CurrentHealth <= 0) OnHealthEnd?.Invoke();
     }
 
@@ -33,6 +37,9 @@ public class Health
         }
 
         CurrentHealth += value;
-        OnHealthAdded?.Invoke(CurrentHealth);
+        OnHealthAdded?.Invoke();
+        OnHealthAddedInt?.Invoke(CurrentHealth);
     }
+
+    public void AddHealth() => AddHealth(1);
 }

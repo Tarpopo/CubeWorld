@@ -5,15 +5,25 @@ using UnityEngine;
 public class PrefabStateCalculator
 {
     [SerializeField] private GameObject[] _prefabsStates;
+    [SerializeField] private bool _allActive;
     private float _delta;
 
     public void TrySetState(int hitsLeft)
     {
         _prefabsStates.DisableAll();
         if (hitsLeft <= 0) return;
-        var stateIndex = Mathf.Ceil(hitsLeft * _delta) - 1;
-        _prefabsStates[(int)stateIndex].Enable();
-        Debug.Log(stateIndex);
+        var stateIndex = Mathf.CeilToInt(hitsLeft * _delta) - 1;
+        if (_allActive)
+        {
+            for (int i = 0; i < stateIndex + 1; i++)
+            {
+                _prefabsStates[i].Enable();
+            }
+        }
+        else
+        {
+            _prefabsStates[stateIndex].Enable();
+        }
     }
 
     public void SetParameters(int maxHitsToDestroy)

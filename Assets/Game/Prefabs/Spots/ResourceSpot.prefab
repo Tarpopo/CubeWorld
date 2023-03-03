@@ -50,6 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateCalculator:
     _prefabsStates: []
+  _resourceSpawner:
+    _spawnerData: {fileID: 11400000, guid: 2f9198c43f2f49f4ba17d8750b92e8df, type: 2}
+    _resourcePrefab: {fileID: 0}
+    _spawnPoint: {fileID: 0}
   _resourcePrefab: {fileID: 0}
   _resourceSpawnPoint: {fileID: 176163055395996046}
   _hitsToDestroy: 0

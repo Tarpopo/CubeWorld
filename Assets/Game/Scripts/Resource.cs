@@ -1,56 +1,51 @@
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Resource : MonoBehaviour, IResource
 {
-    public ResourceType ResourceType => _resourceType;
     public bool CanMine => _health.CurrentHealth > 0;
-    [SerializeField] private PrefabStateCalculator _stateCalculator;
-    [SerializeField] private GameObject _resourcePrefab;
-    [SerializeField] private Transform _resourceSpawnPoint;
-    [SerializeField] private int _hitsToDestroy;
-    [SerializeField] private int _resourceCount;
-    [SerializeField] private float _spawnForce;
-    [SerializeField] private Vector3 _forceDirection = new Vector3(0.5f, 0.5f, 0.5f);
+    public ResourceType ResourceType => _resourceType;
     [SerializeField] private ResourceType _resourceType;
-    private ManagerPool _managerPool;
+    [SerializeField] private PrefabStateCalculator _stateCalculator;
+    [SerializeField] private ResourceSpawner _resourceSpawner;
+    [SerializeField] private int _hitsToDestroy;
     private Health _health;
+    private ValueRestorer _resourceRestorer;
     private NavMeshObstacle _obstacle;
-
-    // private BoxCollider _boxCollider;
 
     public void TakeDamage(int damage)
     {
         _health.ReduceHealth(damage);
-        SpawnResources();
+        _resourceRestorer.StartValueRestoring(this);
     }
 
-    private void DisableComponents()
-    {
-        _obstacle.enabled = false;
-    }
+    private void DisableComponents() => _obstacle.enabled = false;
+    private void EnableComponents() => _obstacle.enabled = true;
 
-    private void Start()
+    private void Awake()
     {
         _obstacle = GetComponent<NavMeshObstacle>();
-        _managerPool = FindObjectOfType<ManagerPool>();
-        _managerPool.AddPool(PoolType.Entities);
-        _health = new Health(_hitsToDestroy);
-        _health.OnReduceHealth += _stateCalculator.TrySetState;
-        _health.OnHealthAdded += _stateCalculator.TrySetState;
-        _health.OnHealthEnd += DisableComponents;
+        _resourceSpawner.SetParameters(FindObjectOfType<ManagerPool>());
         _stateCalculator.SetParameters(_hitsToDestroy);
+        _health = new Health(_hitsToDestroy);
+        _resourceRestorer = new ValueRestorer(2, () => _health.MaxHealth == false, _health.AddHealth);
     }
 
-    private void SpawnResources()
+    private void OnEnable()
     {
-        for (int i = 0; i < _resourceCount; i++)
-        {
-            var resource =
-                _managerPool.Spawn<Rigidbody>(PoolType.Entities, _resourcePrefab, _resourceSpawnPoint.position);
-            resource.velocity =
-                Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * (_forceDirection.normalized * _spawnForce);
-        }
+        _health.OnReduceHealthInt += _stateCalculator.TrySetState;
+        _health.OnReduceHealth += _resourceSpawner.SpawnResources;
+        _health.OnHealthAddedInt += _stateCalculator.TrySetState;
+        _health.OnHealthAdded += EnableComponents;
+        _health.OnHealthEnd += DisableComponents;
+    }
+
+    private void OnDisable()
+    {
+        _health.OnReduceHealthInt -= _stateCalculator.TrySetState;
+        _health.OnReduceHealth -= _resourceSpawner.SpawnResources;
+        _health.OnHealthAddedInt -= _stateCalculator.TrySetState;
+        _health.OnHealthAdded -= EnableComponents;
+        _health.OnHealthEnd -= DisableComponents;
     }
 }
