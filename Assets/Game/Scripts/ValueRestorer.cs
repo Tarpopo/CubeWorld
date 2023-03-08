@@ -5,10 +5,10 @@ using UnityEngine;
 public class ValueRestorer
 {
     public event Action OnValueRestore;
-    private Action _onValueTick;
-    private Func<bool> _activeCondition;
+    private readonly Action _onValueTick;
+    private readonly Func<bool> _activeCondition;
+    private readonly float _restoreTick;
     private Coroutine _coroutine;
-    private float _restoreTick;
 
     public ValueRestorer(float restoreTick, Func<bool> activeCondition, Action onValueTick)
     {

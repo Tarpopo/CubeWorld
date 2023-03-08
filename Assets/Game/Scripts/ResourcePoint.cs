@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Resource : MonoBehaviour, IResource
+public class ResourcePoint : MonoBehaviour, IResourcePoint
 {
     public bool CanMine => _health.CurrentHealth > 0;
     public ResourceType ResourceType => _resourceType;

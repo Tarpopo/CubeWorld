@@ -38,3 +38,8 @@ public enum UnitAnimations
     TakeDamage,
     Death
 }
+public enum SpotsAnimations
+{
+    Idle,
+    Active,
+}

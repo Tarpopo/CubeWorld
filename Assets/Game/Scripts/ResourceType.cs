@@ -2,5 +2,7 @@ public enum ResourceType
 {
     Metal,
     Wood,
-    Kristal
+    Kristal,
+    Steel,
+    Plank
 }

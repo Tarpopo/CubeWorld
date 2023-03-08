@@ -59,5 +59,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kristal
       objectReference: {fileID: 0}
+    - target: {fileID: 2315102987738409993, guid: 4b5e85ae2fd33fd4581caa25cbe4fc0d, type: 3}
+      propertyPath: _resourceType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b5e85ae2fd33fd4581caa25cbe4fc0d, type: 3}

@@ -26,4 +26,18 @@ public class ResourceSpawner
                                 (_spawnerData.ForceDirection.normalized * _spawnerData.SpawnForce);
         }
     }
+
+    public void SpawnResources(Transform collectPoint, Transform spawnPoint, float collectDelay, Action onCollect)
+    {
+        for (int i = 0; i < _spawnerData.ResourceCount; i++)
+        {
+            var resource =
+                _managerPool.Spawn<ICollectableResource>(PoolType.Entities, _resourcePrefab, spawnPoint.position);
+            onCollect += () => _managerPool.Despawn(PoolType.Entities, resource.Resource);
+            resource.Collect(collectPoint, collectDelay, onCollect);
+            resource.Resource.GetComponent<Rigidbody>().velocity =
+                Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) *
+                (_spawnerData.ForceDirection.normalized * _spawnerData.SpawnForce);
+        }
+    }
 }

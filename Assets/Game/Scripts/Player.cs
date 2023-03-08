@@ -2,35 +2,24 @@
 using FSM;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IResourceContainer
 {
+    public Transform ContainPoint => _resourceCollector.CollectPoint;
     [SerializeField] private float _speed;
-    [SerializeField] private float _rollDistance;
     [SerializeField] private float _angleOffset;
-    [SerializeField] private float _rotationSpeed;
     [SerializeField] private PlayerInput _playerInput;
     private IMove _move;
     private IRotateMove _rotateMove;
-    private float _distToCam;
-
-    private Transform _transform;
-    private Camera _camera;
-    private Rigidbody _rigidBody;
-    private Vector3 _beganPos;
-    private Vector3 _moveDirection;
-    private Vector3 _rayPos;
     private StateMachine _stateMachine;
     private AnimationComponent _animationComponent;
-    private TriggerChecker<IResource> _resourceChecker;
+    private TriggerChecker<IResourcePoint> _resourceChecker;
+    private ResourcesUISetter _resourcesUISetter;
+    private ResourceCollector _resourceCollector;
 
     public void TryAttackResource()
     {
         if (_resourceChecker.HaveElements == false) return;
-        foreach (var resource in _resourceChecker.Elements)
-        {
-            resource.TakeDamage(1);
-        }
-
+        foreach (var resource in _resourceChecker.Elements) resource.TakeDamage(1);
         if (_resourceChecker.Elements.Any(resource => resource.CanMine) == false)
         {
             _animationComponent.PlayAnimation(UnitAnimations.Idle);
@@ -38,9 +27,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool TryTakeResource(ResourceType resourceType)
+    {
+        var resource = _resourcesUISetter.GetResource(resourceType);
+        if (resource.HaveResource == false) return false;
+        resource.RemoveResourceValue(1);
+        return true;
+    }
+
     private void Start()
     {
-        _resourceChecker = new TriggerChecker<IResource>();
+        _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
+        _resourceCollector = GetComponentInChildren<ResourceCollector>();
+        _resourceChecker = new TriggerChecker<IResourcePoint>();
         _animationComponent = GetComponent<AnimationComponent>();
         _move = GetComponent<IMove>();
         _rotateMove = GetComponent<IRotateMove>();
@@ -59,7 +58,6 @@ public class Player : MonoBehaviour
             if (_resourceChecker.HaveElements && _resourceChecker.Elements.Any(resource => resource.CanMine))
             {
                 _stateMachine.ChangeState<PlayerAttack>();
-                print("attack");
             }
             else
             {
@@ -75,13 +73,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate() => _stateMachine.CurrentState.PhysicsUpdate();
 
-    private void OnTriggerEnter(Collider other)
-    {
-        _resourceChecker.OnTriggerEnter(other);
-    }
+    private void OnTriggerEnter(Collider other) => _resourceChecker.OnTriggerEnter(other);
 
-    private void OnTriggerExit(Collider other)
-    {
-        _resourceChecker.OnTriggerExit(other);
-    }
+    private void OnTriggerStay(Collider other) => _resourceChecker.OnTriggerStay(other);
+
+    private void OnTriggerExit(Collider other) => _resourceChecker.OnTriggerExit(other);
 }

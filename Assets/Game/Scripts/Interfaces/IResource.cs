@@ -1,5 +1,4 @@
-public interface IResource : IDamageable
+public interface IResource
 {
     public ResourceType ResourceType { get; }
-    public bool CanMine { get; }
 }
