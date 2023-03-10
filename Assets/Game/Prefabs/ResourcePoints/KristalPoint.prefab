@@ -472,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 280496616607744153, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_Name
-      value: KristalSpot
+      value: KristalPoint
       objectReference: {fileID: 0}
     - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: _resourceType
@@ -518,6 +518,14 @@ PrefabInstance:
       propertyPath: _stateCalculator._prefabsStates.Array.data[4]
       value: 
       objectReference: {fileID: 573661124}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: managedReferences[2693579399334461446]._punch.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: managedReferences[2693579399334461446]._duration
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 8643138099894339172, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_Center.x
       value: 0.12

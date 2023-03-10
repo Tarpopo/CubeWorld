@@ -389,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 280496616607744153, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_Name
-      value: MetalSpot
+      value: MetalPoint
       objectReference: {fileID: 0}
     - target: {fileID: 2923205789237699659, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_Size.x
@@ -443,6 +443,14 @@ PrefabInstance:
       propertyPath: _stateCalculator._prefabsStates.Array.data[3]
       value: 
       objectReference: {fileID: 711931149}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: managedReferences[2693579399334461446]._punch.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: managedReferences[2693579399334461446]._duration
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 8643138099894339172, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_Center.x
       value: 0.33

@@ -57,9 +57,28 @@ MonoBehaviour:
     _spawnerData: {fileID: 0}
     _resourcePrefab: {fileID: 0}
     _spawnPoint: {fileID: 0}
-  _minResourceToActive: 1
+  _scaleAnimation:
+    rid: 2693579399334461444
   _createTime: 5
   _getResourceDelay: 3
+  _minResourceToActive: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 2693579399334461444
+      type: {class: PunchScale, ns: , asm: Assembly-CSharp}
+      data:
+        _join: 0
+        _duration: 0.2
+        _punch: {x: 0.1, y: 0.5, z: 0.1}
+        _vibrato: 10
+        _elasticity: 10
+        _transformTween:
+          rid: 2693579399334461445
+    - rid: 2693579399334461445
+      type: {class: TransformTween, ns: , asm: Assembly-CSharp}
+      data:
+        _transform: {fileID: 1167057163360337771}
 --- !u!114 &-5470439244936659270
 MonoBehaviour:
   m_ObjectHideFlags: 0

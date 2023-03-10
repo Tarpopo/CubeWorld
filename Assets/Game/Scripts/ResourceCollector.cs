@@ -1,8 +1,10 @@
+using System;
 using DefaultNamespace;
 using UnityEngine;
 
-public class ResourceCollector : MonoBehaviour
+public class ResourceCollector : MonoBehaviour, ICollector<ResourceType>
 {
+    public event Action<ResourceType> OnCollect;
     public Transform CollectPoint => _collectPoint;
     [SerializeField] private Transform _collectPoint;
     [SerializeField] private float _flyDelay;
@@ -27,6 +29,7 @@ public class ResourceCollector : MonoBehaviour
             _managerPool.Despawn(PoolType.Entities, collectable.Resource);
             _resourceTrigger.TryRemoveItem(collectable.Resource);
             _resourcesUISetter.AddResource(collectable);
+            OnCollect?.Invoke(collectable.ResourceType);
         });
     }
 

@@ -1,13 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ResourcePoint : MonoBehaviour, IResourcePoint
 {
+    public event Action OnTakeDamage;
     public bool CanMine => _health.CurrentHealth > 0;
     public ResourceType ResourceType => _resourceType;
+
+    [SerializeField] private ResourcePointData _resourcePointData;
     [SerializeField] private ResourceType _resourceType;
     [SerializeField] private PrefabStateCalculator _stateCalculator;
     [SerializeField] private ResourceSpawner _resourceSpawner;
+    [SerializeReference] private BaseTweenAnimation _takeDamageAnimation;
     [SerializeField] private int _hitsToDestroy;
     private Health _health;
     private ValueRestorer _resourceRestorer;
@@ -17,6 +22,8 @@ public class ResourcePoint : MonoBehaviour, IResourcePoint
     {
         _health.ReduceHealth(damage);
         _resourceRestorer.StartValueRestoring(this);
+        _takeDamageAnimation.PlayAnimation();
+        OnTakeDamage?.Invoke();
     }
 
     private void DisableComponents() => _obstacle.enabled = false;

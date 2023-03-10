@@ -19,7 +19,7 @@ public class CollectableResource : MonoBehaviour, ICollectableResource
         StartCoroutine(MoveCoroutine(collectPoint, collectDelay, _flyDuration, onCollect));
     }
 
-    private void Start() => _rigidbody = GetComponent<Rigidbody>();
+    private void Awake() => _rigidbody = GetComponent<Rigidbody>();
 
     private void OnEnable() => Collecting = false;
 

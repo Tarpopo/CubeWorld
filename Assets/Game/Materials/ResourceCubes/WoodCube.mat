@@ -11,7 +11,6 @@ Material:
   m_Shader: {fileID: 4800000, guid: f276502ebf8b1431192125b7316d5d67, type: 3}
   m_ValidKeywords:
   - COLORCORRECTION_ON
-  - LIGHTMAP_AO
   - SHADOW_ON
   m_InvalidKeywords:
   - AO_ON
@@ -74,7 +73,7 @@ Material:
     - _AOEnable: 0
     - _AOPower: 1
     - _AOuv: 0
-    - _AmbientPower: 0.27
+    - _AmbientPower: 0.1
     - _Brightness: 0.05
     - _BumpScale: 1
     - _ColorCorrectionEnable: 1
@@ -113,7 +112,7 @@ Material:
     - _OcclusionStrength: 1
     - _OtherSettings: 1
     - _Parallax: 0.02
-    - _RealtimeShadow: 0
+    - _RealtimeShadow: 1
     - _RimEnable: 0
     - _RimPower: 0
     - _Rotation_B: 0
@@ -130,7 +129,7 @@ Material:
     - _Shading_L: 0
     - _Shading_R: 0
     - _Shading_T: 0
-    - _ShadowBlend: 0.786
+    - _ShadowBlend: 1
     - _ShadowInfluence: 0.45
     - _ShowAO: 1
     - _ShowAmbientSettings: 1

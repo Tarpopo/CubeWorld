@@ -112,7 +112,7 @@ Material:
     - _OcclusionStrength: 1
     - _OtherSettings: 1
     - _Parallax: 0.02
-    - _RealtimeShadow: 0
+    - _RealtimeShadow: 1
     - _RimEnable: 0
     - _RimPower: 0
     - _Rotation_B: 0

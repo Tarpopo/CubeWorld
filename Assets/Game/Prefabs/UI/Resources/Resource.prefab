@@ -129,6 +129,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceType: 0
   _resourceCount: {fileID: 4932621581968256804}
+  _scale:
+    rid: 2693579399334461448
+  references:
+    version: 2
+    RefIds:
+    - rid: 2693579399334461448
+      type: {class: PunchScale, ns: , asm: Assembly-CSharp}
+      data:
+        _join: 0
+        _duration: 0.3
+        _punch: {x: 0.2, y: 0.2, z: 0.2}
+        _vibrato: 10
+        _elasticity: 10
+        _transformTween:
+          rid: 2693579399334461450
+    - rid: 2693579399334461450
+      type: {class: TransformTween, ns: , asm: Assembly-CSharp}
+      data:
+        _transform: {fileID: 4932621581624747851}
 --- !u!1 &4932621581968256806
 GameObject:
   m_ObjectHideFlags: 0

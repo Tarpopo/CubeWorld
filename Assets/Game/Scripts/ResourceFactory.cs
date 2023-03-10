@@ -7,18 +7,21 @@ public class ResourceFactory : MonoBehaviour
     [SerializeField] private ResourceType _giveableResource;
     [SerializeField] private ResourceSpawner _getableResourceSpawner;
     [SerializeField] private ResourceSpawner _giveableResourceSpawner;
-    [SerializeField] private int _minResourceToActive;
+    [SerializeReference] private BaseTweenAnimation _scaleAnimation;
     [SerializeField] private float _createTime;
     [SerializeField] private float _getResourceDelay;
+    [SerializeField] private int _minResourceToActive;
     private int _currentResourceCount;
     private TriggerChecker<IResourceContainer> _resourceContainerChecker;
     private Coroutine _generatorCoroutine;
     private Coroutine _getterCoroutine;
     private PlayerInput _playerInput;
     private ManagerPool _managerPool;
+    private AnimationComponent _animationComponent;
 
     private void Start()
     {
+        _animationComponent = GetComponent<AnimationComponent>();
         _playerInput = FindObjectOfType<PlayerInput>();
         _resourceContainerChecker = new TriggerChecker<IResourceContainer>();
         _managerPool = FindObjectOfType<ManagerPool>();
@@ -29,13 +32,16 @@ public class ResourceFactory : MonoBehaviour
 
     private IEnumerator CreateResourceCoroutine()
     {
+        _animationComponent.PlayAnimation(SpotsAnimations.Active);
         while (_currentResourceCount >= _minResourceToActive)
         {
             yield return new WaitForSeconds(_createTime);
-            print("ResourceCreated: " + _giveableResource);
+            _giveableResourceSpawner.SpawnResources();
+            _scaleAnimation.PlayAnimation();
             _currentResourceCount -= _minResourceToActive;
         }
 
+        _animationComponent.PlayAnimation(SpotsAnimations.Idle);
         _generatorCoroutine = null;
     }
 
@@ -47,6 +53,7 @@ public class ResourceFactory : MonoBehaviour
             _getableResourceSpawner.SpawnResources(transform, _resourceContainerChecker.First.ContainPoint, 0.2f, () =>
             {
                 _currentResourceCount++;
+                _scaleAnimation.PlayAnimation();
                 TryStartResourceGenerator();
             });
             yield return new WaitForSeconds(_getResourceDelay);

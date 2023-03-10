@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FSM;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IResourceContainer
 {
+    public event Action<ResourceType> OnRemoveResource;
     public Transform ContainPoint => _resourceCollector.CollectPoint;
     [SerializeField] private float _speed;
     [SerializeField] private float _angleOffset;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour, IResourceContainer
         var resource = _resourcesUISetter.GetResource(resourceType);
         if (resource.HaveResource == false) return false;
         resource.RemoveResourceValue(1);
+        OnRemoveResource?.Invoke(resourceType);
         return true;
     }
 
