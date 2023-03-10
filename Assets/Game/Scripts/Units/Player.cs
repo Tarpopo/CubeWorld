@@ -9,8 +9,9 @@ public class Player : BaseUnit, IResourceContainer
 {
     public event Action<ResourceType> OnRemoveResource;
     public Transform ContainPoint => _resourceCollector.CollectPoint;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _angleOffset;
+
+    [SerializeField] private PlayerData _playerData;
+    private float _angleOffset = 140;
     private PlayerInput _playerInput;
     private TriggerChecker<IResourcePoint> _resourceChecker;
     private ResourcesUISetter _resourcesUISetter;
@@ -43,8 +44,9 @@ public class Player : BaseUnit, IResourceContainer
         _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
         _playerInput = FindObjectOfType<PlayerInput>();
         _resourceCollector = GetComponentInChildren<ResourceCollector>();
-        _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, _move, _rotateMove, transform, _speed,
-            _angleOffset));
+        _resourceCollector.SetParameters(_playerData.ResourceTakeDelay, _playerData.ResourceCheckRadius);
+        _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, _move, _rotateMove, transform,
+            _playerData.MoveSpeed, _angleOffset));
         _stateMachine.AddState(new Idle(_stateMachine));
         _stateMachine.AddState(new PlayerAttack(_stateMachine, _animationComponent, _resourceChecker));
         _playerInput.OnTouchDown += () =>

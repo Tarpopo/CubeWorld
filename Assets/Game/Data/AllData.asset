@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 998971d86cd5aab44be5ec8f0cd90323, type: 2}
   - {fileID: 11400000, guid: f107a6f80b13d67448e65cc14eb9613d, type: 2}
   - {fileID: 11400000, guid: 2deee13df0593bd4090b698bc6ae0b5a, type: 2}
+  _playerData: {fileID: 11400000, guid: cfb23b8b7d1e9ce428099c2a155cc189, type: 2}

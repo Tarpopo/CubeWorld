@@ -2,16 +2,23 @@ using System;
 using DefaultNamespace;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class ResourceCollector : MonoBehaviour, ICollector<ResourceType>
 {
     public event Action<ResourceType> OnCollect;
     public Transform CollectPoint => _collectPoint;
     [SerializeField] private Transform _collectPoint;
-    [SerializeField] private float _flyDelay;
+    private float _flyDelay = 0.25f;
     private TriggerChecker<ICollectableResource> _resourceTrigger;
     private ResourcesUISetter _resourcesUISetter;
     private ManagerPool _managerPool;
     private Coroutine _coroutine;
+
+    public void SetParameters(float flyDelay, float takeRadius)
+    {
+        _flyDelay = flyDelay;
+        GetComponent<SphereCollider>().radius = takeRadius;
+    }
 
     private void Start()
     {

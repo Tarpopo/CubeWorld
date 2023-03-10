@@ -2272,6 +2272,10 @@ PrefabInstance:
       value: RedCap
       objectReference: {fileID: 0}
     - target: {fileID: 2980237230104717046, guid: c937d809b71280547bdf17c70eae4389, type: 3}
+      propertyPath: _playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: cfb23b8b7d1e9ce428099c2a155cc189, type: 2}
+    - target: {fileID: 2980237230104717046, guid: c937d809b71280547bdf17c70eae4389, type: 3}
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 2115568581}
