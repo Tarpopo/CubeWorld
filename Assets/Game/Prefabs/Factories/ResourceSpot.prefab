@@ -47,16 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef9217c5e811b64fb7e94bbf89c1b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _factoryData: {fileID: 0}
+  _spawnPoint: {fileID: 1167057163360337771}
   _gettableResource: 1
   _giveableResource: 3
   _getableResourceSpawner:
     _spawnerData: {fileID: 11400000, guid: 2f9198c43f2f49f4ba17d8750b92e8df, type: 2}
     _resourcePrefab: {fileID: 6164339107551611323, guid: 7aab7b78ad1ae6749b9f91b3553c0e1a, type: 3}
-    _spawnPoint: {fileID: 0}
   _giveableResourceSpawner:
     _spawnerData: {fileID: 0}
     _resourcePrefab: {fileID: 0}
-    _spawnPoint: {fileID: 0}
   _scaleAnimation:
     rid: 2693579399334461444
   _createTime: 5

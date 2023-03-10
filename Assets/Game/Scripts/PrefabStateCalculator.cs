@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 public class PrefabStateCalculator
 {
-    [SerializeField] private GameObject[] _prefabsStates;
     [SerializeField] private bool _allActive;
+    private GameObject[] _prefabsStates;
     private float _delta;
 
     public void TrySetState(int hitsLeft)
@@ -26,8 +26,9 @@ public class PrefabStateCalculator
         }
     }
 
-    public void SetParameters(int maxHitsToDestroy)
+    public void SetParameters(int maxHitsToDestroy, GameObject[] prefabsStates)
     {
+        _prefabsStates = prefabsStates;
         _delta = (float)_prefabsStates.Length / maxHitsToDestroy;
         TrySetState(maxHitsToDestroy);
     }

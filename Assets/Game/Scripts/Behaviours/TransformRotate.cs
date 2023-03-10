@@ -3,13 +3,14 @@ using UnityEngine;
 public class TransformRotate : MonoBehaviour, IRotateMove
 {
     [SerializeField] private Transform _transform;
-    public void Rotate(Quaternion quaternion) => _transform.rotation = quaternion;
+    private bool _active;
 
-    private void OnEnable()
+    public void Rotate(Quaternion quaternion)
     {
+        if (_active) _transform.rotation = quaternion;
     }
 
-    private void OnDisable()
-    {
-    }
+    private void OnEnable() => _active = true;
+
+    private void OnDisable() => _active = false;
 }

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f54c2db2322a5c43bc747479d33cbad, type: 3}
+  m_Name: PlankFactory
+  m_EditorClassIdentifier: 
+  GettableResource: 1
+  GiveableResource: 1
+  GetableResourceSpawner:
+    _spawnerData: {fileID: 11400000, guid: 2f9198c43f2f49f4ba17d8750b92e8df, type: 2}
+    _resourcePrefab: {fileID: 6164339107551611323, guid: 7aab7b78ad1ae6749b9f91b3553c0e1a, type: 3}
+  GiveableResourceSpawner:
+    _spawnerData: {fileID: 11400000, guid: 2f9198c43f2f49f4ba17d8750b92e8df, type: 2}
+    _resourcePrefab: {fileID: 5174614439076559025, guid: d8cf8e6e475c83a48857bbdb2e7ee969, type: 3}
+  CreateTime: 5
+  GetResourceDelay: 0.4
+  MinResourceToActive: 2

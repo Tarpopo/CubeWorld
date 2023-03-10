@@ -6,14 +6,12 @@ public class ResourcePoint : MonoBehaviour, IResourcePoint
 {
     public event Action OnTakeDamage;
     public bool CanMine => _health.CurrentHealth > 0;
-    public ResourceType ResourceType => _resourceType;
-
+    public ResourceType ResourceType => _resourcePointData.ResourceType;
+    
     [SerializeField] private ResourcePointData _resourcePointData;
-    [SerializeField] private ResourceType _resourceType;
-    [SerializeField] private PrefabStateCalculator _stateCalculator;
-    [SerializeField] private ResourceSpawner _resourceSpawner;
+    [SerializeField] private GameObject[] _prefabsStates;
+    [SerializeField] private Transform _spawnPoint;
     [SerializeReference] private BaseTweenAnimation _takeDamageAnimation;
-    [SerializeField] private int _hitsToDestroy;
     private Health _health;
     private ValueRestorer _resourceRestorer;
     private NavMeshObstacle _obstacle;
@@ -32,26 +30,28 @@ public class ResourcePoint : MonoBehaviour, IResourcePoint
     private void Awake()
     {
         _obstacle = GetComponent<NavMeshObstacle>();
-        _resourceSpawner.SetParameters(FindObjectOfType<ManagerPool>());
-        _stateCalculator.SetParameters(_hitsToDestroy);
-        _health = new Health(_hitsToDestroy);
-        _resourceRestorer = new ValueRestorer(2, () => _health.MaxHealth == false, _health.AddHealth);
+        _resourcePointData = Instantiate(_resourcePointData);
+        _resourcePointData.ResourceSpawner.SetParameters(FindObjectOfType<ManagerPool>(), _spawnPoint);
+        _resourcePointData.StateCalculator.SetParameters(_resourcePointData.HitsToDestroy, _prefabsStates);
+        _health = new Health(_resourcePointData.HitsToDestroy);
+        _resourceRestorer = new ValueRestorer(_resourcePointData.RestoreTick, () => _health.MaxHealth == false,
+            _health.AddHealth);
     }
 
     private void OnEnable()
     {
-        _health.OnReduceHealthInt += _stateCalculator.TrySetState;
-        _health.OnReduceHealth += _resourceSpawner.SpawnResources;
-        _health.OnHealthAddedInt += _stateCalculator.TrySetState;
+        _health.OnReduceHealthInt += _resourcePointData.StateCalculator.TrySetState;
+        _health.OnHealthAddedInt += _resourcePointData.StateCalculator.TrySetState;
+        _health.OnReduceHealth += _resourcePointData.ResourceSpawner.SpawnResources;
         _health.OnHealthAdded += EnableComponents;
         _health.OnHealthEnd += DisableComponents;
     }
 
     private void OnDisable()
     {
-        _health.OnReduceHealthInt -= _stateCalculator.TrySetState;
-        _health.OnReduceHealth -= _resourceSpawner.SpawnResources;
-        _health.OnHealthAddedInt -= _stateCalculator.TrySetState;
+        _health.OnReduceHealthInt -= _resourcePointData.StateCalculator.TrySetState;
+        _health.OnHealthAddedInt -= _resourcePointData.StateCalculator.TrySetState;
+        _health.OnReduceHealth -= _resourcePointData.ResourceSpawner.SpawnResources;
         _health.OnHealthAdded -= EnableComponents;
         _health.OnHealthEnd -= DisableComponents;
     }

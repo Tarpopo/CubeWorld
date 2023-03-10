@@ -5,7 +5,7 @@ using UnityEditor.Animations;
 #endif
 using UnityEngine;
 
-[Serializable]
+[RequireComponent(typeof(Animator))]
 public class AnimationComponent : MonoBehaviour
 {
 #if UNITY_EDITOR
@@ -27,6 +27,10 @@ public class AnimationComponent : MonoBehaviour
         _currentState = animationType;
         _animator.SetBool(_currentState.ToString(), true);
     }
+
+    private void OnEnable() => _animator.enabled = true;
+
+    private void OnDisable() => _animator.enabled = false;
 }
 
 public enum UnitAnimations
@@ -38,6 +42,7 @@ public enum UnitAnimations
     TakeDamage,
     Death
 }
+
 public enum SpotsAnimations
 {
     Idle,

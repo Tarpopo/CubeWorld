@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Linq;
-using FSM;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IResourceContainer
+[RequireComponent(typeof(TransformRotate))]
+[RequireComponent(typeof(AnimationComponent))]
+[RequireComponent(typeof(NavMeshMove))]
+public class Player : BaseUnit, IResourceContainer
 {
     public event Action<ResourceType> OnRemoveResource;
     public Transform ContainPoint => _resourceCollector.CollectPoint;
     [SerializeField] private float _speed;
     [SerializeField] private float _angleOffset;
-    [SerializeField] private PlayerInput _playerInput;
-    private IMove _move;
-    private IRotateMove _rotateMove;
-    private StateMachine _stateMachine;
-    private AnimationComponent _animationComponent;
+    private PlayerInput _playerInput;
     private TriggerChecker<IResourcePoint> _resourceChecker;
     private ResourcesUISetter _resourcesUISetter;
     private ResourceCollector _resourceCollector;
@@ -38,15 +36,13 @@ public class Player : MonoBehaviour, IResourceContainer
         return true;
     }
 
-    private void Start()
+    protected override void Start()
     {
-        _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
-        _resourceCollector = GetComponentInChildren<ResourceCollector>();
+        base.Start();
         _resourceChecker = new TriggerChecker<IResourcePoint>();
-        _animationComponent = GetComponent<AnimationComponent>();
-        _move = GetComponent<IMove>();
-        _rotateMove = GetComponent<IRotateMove>();
-        _stateMachine = new StateMachine();
+        _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
+        _playerInput = FindObjectOfType<PlayerInput>();
+        _resourceCollector = GetComponentInChildren<ResourceCollector>();
         _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, _move, _rotateMove, transform, _speed,
             _angleOffset));
         _stateMachine.AddState(new Idle(_stateMachine));
@@ -71,10 +67,6 @@ public class Player : MonoBehaviour, IResourceContainer
         _animationComponent.PlayAnimation(UnitAnimations.Idle);
         _stateMachine.Initialize<Idle>();
     }
-
-    private void Update() => _stateMachine.CurrentState.LogicUpdate();
-
-    private void FixedUpdate() => _stateMachine.CurrentState.PhysicsUpdate();
 
     private void OnTriggerEnter(Collider other) => _resourceChecker.OnTriggerEnter(other);
 

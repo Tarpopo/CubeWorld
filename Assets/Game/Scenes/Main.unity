@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3794001429831069627, guid: b54eedf02fd0a5543a1634b9dbc05445, type: 3}
       propertyPath: m_Name
-      value: WoodSpot
+      value: PlankFactory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b54eedf02fd0a5543a1634b9dbc05445, type: 3}
@@ -633,14 +633,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MetalPoint (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4908363705421667409, guid: 503c4f9b36a87ab438e4ab073993fefb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8617700123070210207, guid: 503c4f9b36a87ab438e4ab073993fefb, type: 3}
-      propertyPath: _stateCalculator._allActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503c4f9b36a87ab438e4ab073993fefb, type: 3}
 --- !u!4 &343485904 stripped
@@ -925,7 +917,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1685418482}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &580505867 stripped
 RectTransform:
@@ -942,10 +934,6 @@ PrefabInstance:
     - target: {fileID: 6642369058174849118, guid: 315ee34396a16974088d4be6350856ad, type: 3}
       propertyPath: m_Name
       value: KristalPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 6642369058174849118, guid: 315ee34396a16974088d4be6350856ad, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6642369058174849119, guid: 315ee34396a16974088d4be6350856ad, type: 3}
       propertyPath: m_RootOrder
@@ -1582,7 +1570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1857375511627382183, guid: d56f2d8e93c3afa42a34ff7ca3d501a7, type: 3}
       propertyPath: m_Name
-      value: MetalSpot
+      value: SteelFactory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d56f2d8e93c3afa42a34ff7ca3d501a7, type: 3}
@@ -1678,9 +1666,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 576479165}
   - {fileID: 580505867}
   - {fileID: 207644534}
-  - {fileID: 576479165}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

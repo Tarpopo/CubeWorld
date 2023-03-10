@@ -8,13 +8,14 @@ public class ResourceSpawner
 {
     [SerializeField] private ResourceSpawnerData _spawnerData;
     [SerializeField] private GameObject _resourcePrefab;
-    [SerializeField] private Transform _spawnPoint;
+    private Transform _spawnPoint;
     private ManagerPool _managerPool;
 
-    public void SetParameters(ManagerPool managerPool)
+    public void SetParameters(ManagerPool managerPool, Transform spawnPoint)
     {
         _managerPool = managerPool;
         _managerPool.AddPool(PoolType.Entities);
+        _spawnPoint = spawnPoint;
     }
 
     public void SpawnResources()

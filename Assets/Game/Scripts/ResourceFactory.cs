@@ -3,14 +3,9 @@ using UnityEngine;
 
 public class ResourceFactory : MonoBehaviour
 {
-    [SerializeField] private ResourceType _gettableResource;
-    [SerializeField] private ResourceType _giveableResource;
-    [SerializeField] private ResourceSpawner _getableResourceSpawner;
-    [SerializeField] private ResourceSpawner _giveableResourceSpawner;
+    [SerializeField] private ResourceFactoryData _factoryData;
+    [SerializeField] private Transform _spawnPoint;
     [SerializeReference] private BaseTweenAnimation _scaleAnimation;
-    [SerializeField] private float _createTime;
-    [SerializeField] private float _getResourceDelay;
-    [SerializeField] private int _minResourceToActive;
     private int _currentResourceCount;
     private TriggerChecker<IResourceContainer> _resourceContainerChecker;
     private Coroutine _generatorCoroutine;
@@ -21,24 +16,25 @@ public class ResourceFactory : MonoBehaviour
 
     private void Start()
     {
+        _factoryData = Instantiate(_factoryData);
         _animationComponent = GetComponent<AnimationComponent>();
         _playerInput = FindObjectOfType<PlayerInput>();
         _resourceContainerChecker = new TriggerChecker<IResourceContainer>();
         _managerPool = FindObjectOfType<ManagerPool>();
-        _getableResourceSpawner.SetParameters(_managerPool);
-        _giveableResourceSpawner.SetParameters(_managerPool);
+        _factoryData.GetableResourceSpawner.SetParameters(_managerPool, _spawnPoint);
+        _factoryData.GiveableResourceSpawner.SetParameters(_managerPool, _spawnPoint);
         _playerInput.OnTouchUp += TryStartGettingResource;
     }
 
     private IEnumerator CreateResourceCoroutine()
     {
         _animationComponent.PlayAnimation(SpotsAnimations.Active);
-        while (_currentResourceCount >= _minResourceToActive)
+        while (_currentResourceCount >= _factoryData.MinResourceToActive)
         {
-            yield return new WaitForSeconds(_createTime);
-            _giveableResourceSpawner.SpawnResources();
+            yield return new WaitForSeconds(_factoryData.CreateTime);
+            _factoryData.GiveableResourceSpawner.SpawnResources();
             _scaleAnimation.PlayAnimation();
-            _currentResourceCount -= _minResourceToActive;
+            _currentResourceCount -= _factoryData.MinResourceToActive;
         }
 
         _animationComponent.PlayAnimation(SpotsAnimations.Idle);
@@ -48,15 +44,16 @@ public class ResourceFactory : MonoBehaviour
     private IEnumerator GetResourceCoroutine()
     {
         while (_resourceContainerChecker.HaveElements &&
-               _resourceContainerChecker.First.TryTakeResource(_gettableResource))
+               _resourceContainerChecker.First.TryTakeResource(_factoryData.GettableResource))
         {
-            _getableResourceSpawner.SpawnResources(transform, _resourceContainerChecker.First.ContainPoint, 0.2f, () =>
-            {
-                _currentResourceCount++;
-                _scaleAnimation.PlayAnimation();
-                TryStartResourceGenerator();
-            });
-            yield return new WaitForSeconds(_getResourceDelay);
+            _factoryData.GetableResourceSpawner.SpawnResources(transform, _resourceContainerChecker.First.ContainPoint,
+                0.2f, () =>
+                {
+                    _currentResourceCount++;
+                    _scaleAnimation.PlayAnimation();
+                    TryStartResourceGenerator();
+                });
+            yield return new WaitForSeconds(_factoryData.GetResourceDelay);
         }
 
         _getterCoroutine = null;
@@ -64,7 +61,7 @@ public class ResourceFactory : MonoBehaviour
 
     private void TryStartResourceGenerator()
     {
-        if (_currentResourceCount <= _minResourceToActive || _generatorCoroutine != null) return;
+        if (_currentResourceCount < _factoryData.MinResourceToActive || _generatorCoroutine != null) return;
         _generatorCoroutine = StartCoroutine(CreateResourceCoroutine());
     }
 

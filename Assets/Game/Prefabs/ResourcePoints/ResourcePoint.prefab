@@ -48,14 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ab05ded6f9adc439b2af5c4f7852aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resourcePointData: {fileID: 0}
+  _prefabsStates: []
+  _spawnPoint: {fileID: 176163055395996046}
   _resourceType: 0
   _stateCalculator:
-    _prefabsStates: []
     _allActive: 0
   _resourceSpawner:
     _spawnerData: {fileID: 11400000, guid: 2f9198c43f2f49f4ba17d8750b92e8df, type: 2}
     _resourcePrefab: {fileID: 0}
-    _spawnPoint: {fileID: 0}
   _takeDamageAnimation:
     rid: 2693579399334461446
   _hitsToDestroy: 0

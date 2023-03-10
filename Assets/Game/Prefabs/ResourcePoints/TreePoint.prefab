@@ -605,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 280496616607744152, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.47271
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 280496616607744152, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -641,7 +641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 280496616607744153, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_Name
-      value: TreeSpot
+      value: TreePoint
       objectReference: {fileID: 0}
     - target: {fileID: 280496616607744153, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -667,6 +667,30 @@ PrefabInstance:
       propertyPath: _resourcePrefab
       value: 
       objectReference: {fileID: 6164339107551611323, guid: 7aab7b78ad1ae6749b9f91b3553c0e1a, type: 3}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: _resourcePointData
+      value: 
+      objectReference: {fileID: 11400000, guid: 2deee13df0593bd4090b698bc6ae0b5a, type: 2}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: _prefabsStates.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: _prefabsStates.Array.data[0]
+      value: 
+      objectReference: {fileID: 707930106}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: _prefabsStates.Array.data[1]
+      value: 
+      objectReference: {fileID: 1741957126}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: _prefabsStates.Array.data[2]
+      value: 
+      objectReference: {fileID: 89022237}
+    - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
+      propertyPath: _prefabsStates.Array.data[3]
+      value: 
+      objectReference: {fileID: 842418975}
     - target: {fileID: 3486556308272725079, guid: 836bbac7f641ba446a37b4b70a3eb6c5, type: 3}
       propertyPath: _resourceSpawner._spawnPoint
       value: 
