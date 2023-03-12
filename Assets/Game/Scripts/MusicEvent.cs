@@ -15,7 +15,12 @@ public class MusicEvent : MonoBehaviour
         for (int i = 0; i < _songLenght; i++)
         {
             if (i == _secondsEvent) _onEvent?.Invoke();
-            yield return new WaitForSeconds(1);
+            float time = 0;
+            while (time <= 1)
+            {
+                time += Time.fixedDeltaTime;
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 }

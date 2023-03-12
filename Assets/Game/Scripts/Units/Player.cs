@@ -39,6 +39,7 @@ public class Player : BaseUnit, IResourceContainer
 
     protected override void Start()
     {
+        Application.targetFrameRate = 60;
         base.Start();
         _resourceChecker = new TriggerChecker<IResourcePoint>();
         _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
