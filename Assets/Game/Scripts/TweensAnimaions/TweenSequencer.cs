@@ -12,6 +12,7 @@ public class TweenSequencer : MonoBehaviour
 
     public void PlayForward() => _sequence.PlayForward();
     public void PlayBackward() => _sequence.PlayBackwards();
+    public void Play() => _sequence.Play();
 
     [Button]
     public void PlayForward(Action onEnd = null)
