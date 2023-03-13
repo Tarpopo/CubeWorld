@@ -39,4 +39,6 @@ public class CollectableResource : MonoBehaviour, ICollectableResource
         _rigidbody.SetGravity(true);
         onEnd?.Invoke();
     }
+
+    public override int GetHashCode() => gameObject.GetHashCode();
 }

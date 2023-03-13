@@ -1,5 +1,6 @@
 using System;
 using DefaultNamespace;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -18,6 +19,15 @@ public class ResourceCollector : MonoBehaviour, ICollector<ResourceType>
     {
         _flyDelay = flyDelay;
         GetComponent<SphereCollider>().radius = takeRadius;
+    }
+
+    [Button]
+    private void ShowAllItems()
+    {
+        foreach (var collectable in _resourceTrigger.Elements)
+        {
+            print(collectable.Resource.name);
+        }
     }
 
     private void Start()
