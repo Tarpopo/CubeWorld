@@ -11,7 +11,7 @@ public class Player : BaseUnit, IResourceContainer
     public Transform ContainPoint => _resourceCollector.CollectPoint;
 
     [SerializeField] private PlayerData _playerData;
-    private float _angleOffset = 140;
+    [SerializeField] private float _angleOffset = 140;
     private PlayerInput _playerInput;
     private TriggerChecker<IResourcePoint> _resourceChecker;
     private ResourcesUISetter _resourcesUISetter;

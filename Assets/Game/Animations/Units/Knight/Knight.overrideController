@@ -9,9 +9,9 @@ AnimatorOverrideController:
   m_Name: Knight
   m_Controller: {fileID: 9100000, guid: 137f838a346e75641affde9d7a8cbcb5, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 39bc397879e9daf45a8dd9e69a03ec34, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 39bc397879e9daf45a8dd9e69a03ec34, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: fefa4d6a4a445ff4a9f1a4879ec59226, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: fefa4d6a4a445ff4a9f1a4879ec59226, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 68475fe94ebe9ba4ca8875d0530857e5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a7e33b0e21b294749b8fc60c8e9409f3, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 68475fe94ebe9ba4ca8875d0530857e5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2340a4556b92f204e9ad99ef64edd2a1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fefa4d6a4a445ff4a9f1a4879ec59226, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d5f1249e1238bca45b253d18aa5001f0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 39bc397879e9daf45a8dd9e69a03ec34, type: 2}
