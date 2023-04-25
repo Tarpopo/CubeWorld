@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class Enemy : BaseUnit
 {
+    [SerializeField] private EnemyData _enemyData;
+    [SerializeField] private PointGetter _pointGetter;
+
     protected override void Start()
     {
         base.Start();
         _stateMachine.AddState(new Idle(_stateMachine));
+        _stateMachine.AddState(new EnemyIdle(_stateMachine, _enemyData.IdleTime));
+        _stateMachine.AddState(new EnemyMove(_stateMachine, _pointGetter, _animationComponent, (NavMeshMove)_move,
+            _enemyData.NavMeshSpeed));
         _animationComponent.PlayAnimation(UnitAnimations.Idle);
-        _stateMachine.Initialize<Idle>();
+        _stateMachine.Initialize<EnemyIdle>();
     }
 
     // private void OnTriggerEnter(Collider other) => _resourceChecker.OnTriggerEnter(other);

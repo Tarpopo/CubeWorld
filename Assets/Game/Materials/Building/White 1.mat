@@ -8,8 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: White 1
-  m_Shader: {fileID: 4800000, guid: dd71abba2dbe683468cb262da3893f4a, type: 3}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 4800000, guid: fb19280b97d72c6468792b23c808345d, type: 3}
+  m_ValidKeywords:
+  - COLORCORRECTION_ON
+  - LIGHTMAP_AO
+  - SHADOW_ON
   m_InvalidKeywords:
   - AO_ON
   - _AOUV_UV0
@@ -40,8 +43,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3

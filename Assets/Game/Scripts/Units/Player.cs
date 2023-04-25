@@ -46,8 +46,8 @@ public class Player : BaseUnit, IResourceContainer
         _playerInput = FindObjectOfType<PlayerInput>();
         _resourceCollector = GetComponentInChildren<ResourceCollector>();
         _resourceCollector.SetParameters(_playerData.ResourceTakeDelay, _playerData.ResourceCheckRadius);
-        _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, _move, _rotateMove, transform,
-            _playerData.MoveSpeed, _angleOffset));
+        _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, Camera.main.transform, _move, _rotateMove,
+            transform, _playerData.MoveSpeed, _angleOffset));
         _stateMachine.AddState(new Idle(_stateMachine));
         _stateMachine.AddState(new PlayerAttack(_stateMachine, _animationComponent, _resourceChecker));
         _playerInput.OnTouchDown += () =>

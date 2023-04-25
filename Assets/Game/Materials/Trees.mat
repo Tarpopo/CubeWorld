@@ -8,10 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Trees
-  m_Shader: {fileID: 4800000, guid: dd71abba2dbe683468cb262da3893f4a, type: 3}
+  m_Shader: {fileID: 4800000, guid: f276502ebf8b1431192125b7316d5d67, type: 3}
   m_ValidKeywords:
   - COLORCORRECTION_ON
-  - LIGHTMAP_AO
+  - LIGHTMAP_MULTIPLY
   - SHADOW_ON
   m_InvalidKeywords:
   - AO_ON
@@ -44,8 +44,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -127,10 +128,10 @@ Material:
     - _GradientHeight_L: 1
     - _GradientHeight_R: 1
     - _GradientHeight_T: 1
-    - _GradientSpace: 1
+    - _GradientSpace: 0
     - _HFogEnable: 0
     - _LMPower: 1
-    - _LmapBlendingMode: 2
+    - _LmapBlendingMode: 1
     - _LmapEnable: 1
     - _MainTexturePower: 0
     - _Metallic: 0
