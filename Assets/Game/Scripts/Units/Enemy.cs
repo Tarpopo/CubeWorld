@@ -11,7 +11,7 @@ public class Enemy : BaseUnit
         _stateMachine.AddState(new Idle(_stateMachine));
         _stateMachine.AddState(new EnemyIdle(_stateMachine, _enemyData.IdleTime));
         _stateMachine.AddState(new EnemyMove(_stateMachine, _pointGetter, _animationComponent, (NavMeshMove)_move,
-            _enemyData.NavMeshSpeed));
+            _enemyData.MoveSpeed));
         _animationComponent.PlayAnimation(UnitAnimations.Idle);
         _stateMachine.Initialize<EnemyIdle>();
     }

@@ -14,4 +14,6 @@ public class NavMeshPointMove : ActionTask<NavMeshMove>
         if (agent.IsClose == false) return;
         EndAction(true);
     }
+
+    protected override void OnStop() => agent.StopMove();
 }

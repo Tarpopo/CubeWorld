@@ -20,7 +20,10 @@ public class NavMeshMove : MonoBehaviour, IMove
         _navMeshAgent.SetDestination(point);
     }
 
-    public void StopMove() => _navMeshAgent.enabled = false;
+    public void StopMove()
+    {
+        if (_navMeshAgent.isOnNavMesh) _navMeshAgent.ResetPath();
+    }
 
     private void OnEnable() => _navMeshAgent.enabled = true;
 

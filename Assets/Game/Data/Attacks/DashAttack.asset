@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dac133b886c5be498d6581d8fdeb773, type: 3}
+  m_Name: DashAttack
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _attackRadius: 3
+  _attackStartDelay: 0.6
+  _damageableTag: Player
+  _attackAmination: 0
+  _gizmosColor: {r: 0.77254903, g: 0, b: 0, a: 0.4745098}
+  _particles: {fileID: 11400000, guid: fb536035a48176d42a27ae5c6b2d75bf, type: 2}
+  _dashTime: 0.15
+  _dashSpeed: 0.2

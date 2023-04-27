@@ -40,7 +40,9 @@ public enum UnitAnimations
     AxeAttack,
     PickAttack,
     TakeDamage,
-    Death
+    Death,
+    AttackSit,
+    AttackJump
 }
 
 public enum SpotsAnimations
