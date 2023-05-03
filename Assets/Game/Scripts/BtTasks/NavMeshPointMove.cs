@@ -6,12 +6,20 @@ public class NavMeshPointMove : ActionTask<NavMeshMove>
 {
     [RequiredField] public BBParameter<Vector3> endPoint;
     [RequiredField] public BBParameter<float> moveSpeed;
+    [RequiredField] public BBParameter<float> stopDistance;
 
-    protected override void OnExecute() => agent.SetMoveDestination(endPoint.value, moveSpeed.value);
+    private void MoveToPoint() => agent.SetMoveDestination(endPoint.value, moveSpeed.value);
+
+    protected override void OnExecute() => MoveToPoint();
 
     protected override void OnUpdate()
     {
-        if (agent.IsClose == false) return;
+        if (agent.Close(stopDistance.value) == false)
+        {
+            if (endPoint.value.Equals(agent.EndPathPosition) == false) MoveToPoint();
+            return;
+        }
+
         EndAction(true);
     }
 

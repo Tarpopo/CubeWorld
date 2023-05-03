@@ -1,32 +1,17 @@
 using System;
 using Sirenix.OdinInspector;
-#if UNITY_EDITOR
-using UnityEditor.Animations;
-#endif
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class AnimationComponent : MonoBehaviour
 {
-#if UNITY_EDITOR
-    [SerializeField] private AnimatorController _animatorController;
-#endif
-    [SerializeField] private Animator _animator;
+    public Enum Animations => _animations;
     [SerializeReference] private Enum _animations;
-    private Enum _currentState;
-#if UNITY_EDITOR
-    [Button]
-    private void UpdateAnimator()
-    {
-        _animatorController.GenerateAnimatorControllerFromExist(_animations, true);
-    }
-#endif
-    public void PlayAnimation(Enum animationType)
-    {
-        if (_currentState != null) _animator.SetBool(_currentState.ToString(), false);
-        _currentState = animationType;
-        _animator.SetBool(_currentState.ToString(), true);
-    }
+    [SerializeField] private Animator _animator;
+
+    public void PlayAnimation(Enum animationType) => _animator.Play(animationType.ToString());
+    public void PlayAnimation(string animationName) => _animator.Play(animationName,0);
+    public void PlayAnimation(AnimationClip clip) => _animator.Play(clip.name);
 
     private void OnEnable() => _animator.enabled = true;
 
@@ -42,7 +27,9 @@ public enum UnitAnimations
     TakeDamage,
     Death,
     AttackSit,
-    AttackJump
+    AttackJump,
+    Landing,
+    Getup
 }
 
 public enum SpotsAnimations

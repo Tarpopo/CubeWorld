@@ -360,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603471009513662873, guid: 4494c8cc24961ef4c8144b6e8f4b0a68, type: 3}
       propertyPath: _objectReferences.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2603471009513662873, guid: 4494c8cc24961ef4c8144b6e8f4b0a68, type: 3}
       propertyPath: _objectReferences.Array.data[1]
@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603471009513662873, guid: 4494c8cc24961ef4c8144b6e8f4b0a68, type: 3}
       propertyPath: _serializedVariables.Array.data[0]._json
-      value: '{"_value":1,"_name":"Target","_id":"1c1a3c83-ccd6-49e1-bfb1-30924289768a","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
+      value: '{"_name":"Target","_id":"1c1a3c83-ccd6-49e1-bfb1-30924289768a","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.GameObject,
         UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
       objectReference: {fileID: 0}
     - target: {fileID: 2603471009513662873, guid: 4494c8cc24961ef4c8144b6e8f4b0a68, type: 3}
@@ -395,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603471009513662873, guid: 4494c8cc24961ef4c8144b6e8f4b0a68, type: 3}
       propertyPath: _serializedVariables.Array.data[0]._references.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2603471009513662873, guid: 4494c8cc24961ef4c8144b6e8f4b0a68, type: 3}
       propertyPath: _serializedVariables.Array.data[1]._references.Array.size
@@ -1149,7 +1149,6 @@ GameObject:
   - component: {fileID: 764938758}
   - component: {fileID: 764938757}
   - component: {fileID: 764938761}
-  - component: {fileID: 764938762}
   m_Layer: 0
   m_Name: Skelet
   m_TagString: Untagged
@@ -1201,13 +1200,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764938748}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c5c0d92d082b0241b4fdf6b043b41f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animationComponent: {fileID: 764938756}
+  _navMeshMove: {fileID: 764938754}
   _enemyData: {fileID: 11400000, guid: b2adab8dcc2ed4f42b68d5052c51695d, type: 2}
   _pointGetter: {fileID: 1507993422}
+  _attackNotifyPoint: {fileID: 1212940479}
 --- !u!65 &764938752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1217,7 +1219,7 @@ BoxCollider:
   m_GameObject: {fileID: 764938748}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.93584114, y: 1.7031951, z: 0.447023}
   m_Center: {x: -0.03207946, y: 0.35159755, z: 0.026070694}
@@ -1284,15 +1286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e0d72528128e74aa5f9ad8243fa1b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animatorController: {fileID: 9100000, guid: e81860a61bd523e4491eda1aebbc5b04, type: 2}
-  _animator: {fileID: 764938749}
   _animations:
-    rid: 2310017210662780928
+    rid: 4864617731214802944
+  _animator: {fileID: 764938749}
   references:
     version: 2
     RefIds:
-    - rid: 2310017210662780928
-      type: {class: UnitAnimations, ns: , asm: Assembly-CSharp}
+    - rid: 4864617731214802944
+      type: {class: Skelet, ns: , asm: Assembly-CSharp}
       data:
         value__: 0
 --- !u!114 &764938757
@@ -1313,8 +1314,13 @@ MonoBehaviour:
     Getter":{"_value":1,"_name":"Points Getter","_id":"6db8f8d2-9ac6-4a6f-84b6-c8631dd46e10","$type":"NodeCanvas.Framework.Variable`1[[PointGetter,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"End
     Point":{"_propertyPath":"DamagableViewChecker.PointPosition","_name":"End Point","_id":"1ca0027c-7316-40b5-9be2-5cb74d7dabae","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
-    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Attack":{"_propertyPath":"DashAttack.Attack","_name":"Attack","_id":"6f6c863d-14f2-49f4-9261-be174582838f","$type":"NodeCanvas.Framework.Variable`1[[IAttack,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Wait":{"_value":2.0,"_name":"Wait","_id":"c9874610-3b23-40b7-9227-ab33f7d09d40","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Attack":{"_propertyPath":"Enemy.DashAttack","_name":"Attack","_id":"6f6c863d-14f2-49f4-9261-be174582838f","$type":"NodeCanvas.Framework.Variable`1[[IAttack,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"IdleTime":{"_value":2.0,"_propertyPath":"Enemy.IdleTime","_name":"IdleTime","_id":"c9874610-3b23-40b7-9227-ab33f7d09d40","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"AttackNotifyer":{"_propertyPath":"Enemy.AttackNotifier","_name":"AttackNotifyer","_id":"78ff732a-4692-445a-a476-4034d561a5a5","$type":"NodeCanvas.Framework.Variable`1[[AttackNotifier,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"AfterDashDelay":{"_propertyPath":"Enemy.AfterDashDelay","_name":"AfterDashDelay","_id":"f45b3635-b2e5-4ef1-9cfc-4a3bd6771e8d","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"StartDashAttackDelay":{"_propertyPath":"Enemy.StartDashAttackDelay","_name":"StartDashAttackDelay","_id":"76b72d78-25c8-4e9a-9d35-046ea27cb416","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"DashStartDistance":{"_propertyPath":"Enemy.DashStartDistance","_name":"DashStartDistance","_id":"294593cb-4c56-44a0-a121-1a9d71c0fda5","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"Visible":{"_propertyPath":"Enemy.Visible","_name":"Visible","_id":"4fa7d2ee-6d26-4c3f-b981-cbffca4f27a5","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
   _objectReferences:
   - {fileID: 0}
@@ -1331,10 +1337,25 @@ MonoBehaviour:
   - _json: '{"_propertyPath":"DamagableViewChecker.PointPosition","_name":"End Point","_id":"1ca0027c-7316-40b5-9be2-5cb74d7dabae","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
-  - _json: '{"_propertyPath":"DashAttack.Attack","_name":"Attack","_id":"6f6c863d-14f2-49f4-9261-be174582838f","$type":"NodeCanvas.Framework.Variable`1[[IAttack,
+  - _json: '{"_propertyPath":"Enemy.DashAttack","_name":"Attack","_id":"6f6c863d-14f2-49f4-9261-be174582838f","$type":"NodeCanvas.Framework.Variable`1[[IAttack,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
-  - _json: '{"_value":2.0,"_name":"Wait","_id":"c9874610-3b23-40b7-9227-ab33f7d09d40","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+  - _json: '{"_value":2.0,"_propertyPath":"Enemy.IdleTime","_name":"IdleTime","_id":"c9874610-3b23-40b7-9227-ab33f7d09d40","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Enemy.AttackNotifier","_name":"AttackNotifyer","_id":"78ff732a-4692-445a-a476-4034d561a5a5","$type":"NodeCanvas.Framework.Variable`1[[AttackNotifier,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Enemy.AfterDashDelay","_name":"AfterDashDelay","_id":"f45b3635-b2e5-4ef1-9cfc-4a3bd6771e8d","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Enemy.StartDashAttackDelay","_name":"StartDashAttackDelay","_id":"76b72d78-25c8-4e9a-9d35-046ea27cb416","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Enemy.DashStartDistance","_name":"DashStartDistance","_id":"294593cb-4c56-44a0-a121-1a9d71c0fda5","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"Enemy.Visible","_name":"Visible","_id":"4fa7d2ee-6d26-4c3f-b981-cbffca4f27a5","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
     _references: []
 --- !u!114 &764938758
@@ -1393,25 +1414,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _viewColor: {r: 0.7924528, g: 0.78123885, b: 0.78123885, a: 0.34117648}
   _viewAngle: 140
-  _viewDistance: 14.42
+  _viewDistance: 15
   _damageableChecker:
     _tag: Player
---- !u!114 &764938762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764938748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f662dedd5889f34b91d6183cb9856ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _particlesPoint: {fileID: 1212940479}
-  _dashAttackData: {fileID: 11400000, guid: 722a95bebb97b444eb37166e82d9629d, type: 2}
-  _navMeshAgent: {fileID: 764938755}
-  _animationComponent: {fileID: 764938756}
 --- !u!1001 &767301897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3251,6 +3256,8 @@ GameObject:
   - component: {fileID: 1962425056}
   - component: {fileID: 1962425055}
   - component: {fileID: 1962425054}
+  - component: {fileID: 1962425057}
+  - component: {fileID: 1962425058}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3294,7 +3301,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 11
-  m_Depth: -1
+  m_Depth: 0.2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -3324,6 +3331,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30.57, y: 0, z: 0}
+--- !u!65 &1962425057
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962425053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 22, z: 60}
+  m_Center: {x: 0, y: 0, z: 30}
+--- !u!114 &1962425058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962425053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a73fc84c4646d3e4e82a628d2963452d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1979469040
 GameObject:
   m_ObjectHideFlags: 0

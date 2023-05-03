@@ -1,5 +1,7 @@
 #if UNITY_EDITOR
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -16,7 +18,7 @@ public static class AnimatorGenerator
         }
 
         animatorController.GenerateStates(animationsArray);
-        animatorController.GenerateTransitions(animationsArray);
+        animatorController.GenerateTransitions();
     }
 
     private static void GenerateStates(this AnimatorController animatorController, string[] animations)
@@ -29,7 +31,7 @@ public static class AnimatorGenerator
         }
     }
 
-    private static void GenerateTransitions(this AnimatorController animatorController, string[] animations)
+    private static void GenerateTransitions(this AnimatorController animatorController)
     {
         var rootStateMachine = animatorController.layers[0].stateMachine;
         var states = rootStateMachine.states;
@@ -49,6 +51,12 @@ public static class AnimatorGenerator
         //     {
         //     }
         // }
+    }
+
+    public static IEnumerable<string> GetAllStateNames(this AnimatorController animatorController)
+    {
+        var rootStateMachine = animatorController.layers[0].stateMachine;
+        return rootStateMachine.states.Select(state => state.state.name);
     }
 }
 #endif

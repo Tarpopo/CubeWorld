@@ -4,10 +4,14 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMove : MonoBehaviour, IMove
 {
-    public bool IsClose => _navMeshAgent.pathPending == false &&
-                           _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance;
+    public bool IsClose => Close(_navMeshAgent.stoppingDistance);
+    public Vector3 EndPathPosition => _navMeshAgent.pathEndPosition;
+
 
     [SerializeField] private NavMeshAgent _navMeshAgent;
+
+    public bool Close(float stopDistance) =>
+        _navMeshAgent.pathPending == false && _navMeshAgent.remainingDistance <= stopDistance;
 
     public void Move(Vector3 direction, float moveSpeed)
     {
@@ -25,7 +29,11 @@ public class NavMeshMove : MonoBehaviour, IMove
         if (_navMeshAgent.isOnNavMesh) _navMeshAgent.ResetPath();
     }
 
-    private void OnEnable() => _navMeshAgent.enabled = true;
+    public void DisableNavmesh() => _navMeshAgent.enabled = false;
 
-    private void OnDisable() => _navMeshAgent.enabled = false;
+    public void EnableNavMesh() => _navMeshAgent.enabled = true;
+
+    private void OnEnable() => EnableNavMesh();
+
+    private void OnDisable() => DisableNavmesh();
 }

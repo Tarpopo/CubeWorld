@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class Vector3Extensions
 {
@@ -74,6 +76,23 @@ public static class Vector3Extensions
     {
         var quaternion = Quaternion.AngleAxis(angle, axis);
         return quaternion * vector;
+    }
+
+    public static IEnumerator LerpValue(this Vector3 startValue, Vector3 endValue, float startDelay, float duration,
+        UnityAction<Vector3, float> onValueUpdated, UnityAction onUpdated, UnityAction onEnd = null)
+    {
+        float elapsed = 0;
+        yield return new WaitForSeconds(startDelay);
+        while (elapsed <= duration)
+        {
+            onValueUpdated?.Invoke(Vector3.Lerp(startValue, endValue, elapsed / duration), elapsed / duration);
+            onUpdated?.Invoke();
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        onValueUpdated?.Invoke(Vector3.Lerp(startValue, endValue, 1), 1);
+        onEnd?.Invoke();
     }
 
     public static Vector3 ConvertToXZVector(this Vector3 vector) => new Vector3(vector.x, 0, vector.y);

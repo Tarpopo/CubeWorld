@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca56e47d60303e144ab674cb3022fbc5, type: 3}
   m_Name: Enemy Data
   m_EditorClassIdentifier: 
-  _idleTime: 4
-  _navMeshSpeed: 5
+  _idleTime:
+    _minValue: 2
+    _maxValue: 5
+  _moveSpeed: 4
+  _dashAttackData: {fileID: 11400000, guid: 722a95bebb97b444eb37166e82d9629d, type: 2}
+  _notifierData: {fileID: 11400000, guid: 264a1b4f4289c34439c3784e55a972b2, type: 2}

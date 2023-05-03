@@ -19,13 +19,13 @@ public class Player : BaseUnit, IResourceContainer
 
     public void TryAttackResource()
     {
-        if (_resourceChecker.HaveElements == false) return;
-        foreach (var resource in _resourceChecker.Elements) resource.TakeDamage(1);
-        if (_resourceChecker.Elements.Any(resource => resource.CanMine) == false)
-        {
-            _animationComponent.PlayAnimation(UnitAnimations.Idle);
-            _stateMachine.ChangeState<Idle>();
-        }
+        // if (_resourceChecker.HaveElements == false) return;
+        // foreach (var resource in _resourceChecker.Elements) resource.TakeDamage(1);
+        // if (_resourceChecker.Elements.Any(resource => resource.CanMine) == false)
+        // {
+        //     _animationComponent.PlayAnimation(UnitAnimations.Idle);
+        //     _stateMachine.ChangeState<Idle>();
+        // }
     }
 
     public bool TryTakeResource(ResourceType resourceType)
@@ -39,36 +39,36 @@ public class Player : BaseUnit, IResourceContainer
 
     protected override void Start()
     {
-        Application.targetFrameRate = 60;
-        base.Start();
-        _resourceChecker = new TriggerChecker<IResourcePoint>();
-        _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
-        _playerInput = FindObjectOfType<PlayerInput>();
-        _resourceCollector = GetComponentInChildren<ResourceCollector>();
-        _resourceCollector.SetParameters(_playerData.ResourceTakeDelay, _playerData.ResourceCheckRadius);
-        _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, Camera.main.transform, _move, _rotateMove,
-            transform, _playerData.MoveSpeed, _angleOffset));
-        _stateMachine.AddState(new Idle(_stateMachine));
-        _stateMachine.AddState(new PlayerAttack(_stateMachine, _animationComponent, _resourceChecker));
-        _playerInput.OnTouchDown += () =>
-        {
-            _animationComponent.PlayAnimation(UnitAnimations.Run);
-            _stateMachine.ChangeState<PlayerMove>();
-        };
-        _playerInput.OnTouchUp += () =>
-        {
-            if (_resourceChecker.HaveElements && _resourceChecker.Elements.Any(resource => resource.CanMine))
-            {
-                _stateMachine.ChangeState<PlayerAttack>();
-            }
-            else
-            {
-                _animationComponent.PlayAnimation(UnitAnimations.Idle);
-                _stateMachine.ChangeState<Idle>();
-            }
-        };
-        _animationComponent.PlayAnimation(UnitAnimations.Idle);
-        _stateMachine.Initialize<Idle>();
+        // Application.targetFrameRate = 60;
+        // base.Start();
+        // _resourceChecker = new TriggerChecker<IResourcePoint>();
+        // _resourcesUISetter = FindObjectOfType<ResourcesUISetter>();
+        // _playerInput = FindObjectOfType<PlayerInput>();
+        // _resourceCollector = GetComponentInChildren<ResourceCollector>();
+        // _resourceCollector.SetParameters(_playerData.ResourceTakeDelay, _playerData.ResourceCheckRadius);
+        // _stateMachine.AddState(new PlayerMove(_stateMachine, _playerInput, Camera.main.transform, _move, _rotateMove,
+        //     transform, _playerData.MoveSpeed, _angleOffset));
+        // _stateMachine.AddState(new Idle(_stateMachine));
+        // _stateMachine.AddState(new PlayerAttack(_stateMachine, _animationComponent, _resourceChecker));
+        // _playerInput.OnTouchDown += () =>
+        // {
+        //     _animationComponent.PlayAnimation(UnitAnimations.Run);
+        //     _stateMachine.ChangeState<PlayerMove>();
+        // };
+        // _playerInput.OnTouchUp += () =>
+        // {
+        //     if (_resourceChecker.HaveElements && _resourceChecker.Elements.Any(resource => resource.CanMine))
+        //     {
+        //         _stateMachine.ChangeState<PlayerAttack>();
+        //     }
+        //     else
+        //     {
+        //         _animationComponent.PlayAnimation(UnitAnimations.Idle);
+        //         _stateMachine.ChangeState<Idle>();
+        //     }
+        // };
+        // _animationComponent.PlayAnimation(UnitAnimations.Idle);
+        // _stateMachine.Initialize<Idle>();
     }
 
     private void OnTriggerEnter(Collider other) => _resourceChecker.OnTriggerEnter(other);

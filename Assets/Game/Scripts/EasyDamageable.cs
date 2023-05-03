@@ -7,6 +7,6 @@ public class EasyDamageable : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        throw new NotImplementedException();
+        print("I took damage");
     }
 }

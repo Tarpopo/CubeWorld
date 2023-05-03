@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: DashAttack
   m_EditorClassIdentifier: 
   _damage: 1
-  _attackRadius: 3
-  _attackStartDelay: 0.6
+  _attackRadius: 1
+  _attackStartDistance: 6
+  _attackStartDelay: 0.5
   _damageableTag: Player
   _attackAmination: 0
   _gizmosColor: {r: 0.77254903, g: 0, b: 0, a: 0.4745098}
-  _particles: {fileID: 11400000, guid: fb536035a48176d42a27ae5c6b2d75bf, type: 2}
-  _dashTime: 0.15
-  _dashSpeed: 0.2
-  _dashDuration: 0.2
-  _dashDistance: 4
-  _yMultiply: 1.2
+  _afterDashDelay: 1
+  _dashDuration: 0.15
+  _dashDistance: 8
+  _yMultiply: 1.4
   _yCurve:
     serializedVersion: 2
     m_Curve:
