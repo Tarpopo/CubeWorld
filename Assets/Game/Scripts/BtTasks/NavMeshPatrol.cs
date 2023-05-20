@@ -2,8 +2,9 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
 
-public class NavMeshPatrol : ActionTask<NavMeshMove>
+public class NavMeshPatrol : ActionTask
 {
+    [RequiredField] public BBParameter<NavMeshMove> navMeshMove;
     [RequiredField] public BBParameter<PointGetter> pointsGetter;
     [RequiredField] public BBParameter<float> moveSpeed;
     private Transform _point;
@@ -11,12 +12,12 @@ public class NavMeshPatrol : ActionTask<NavMeshMove>
     protected override void OnExecute()
     {
         _point = pointsGetter.value.GetPoint();
-        agent.SetMoveDestination(_point.position, moveSpeed.value);
+        navMeshMove.value.SetMoveDestination(_point.position, moveSpeed.value);
     }
 
     protected override void OnUpdate()
     {
-        if (agent.IsClose == false) return;
+        if (navMeshMove.value.IsClose == false) return;
         EndAction(true);
     }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f945e777233a59f4aba40aeca29093a6, type: 3}
+  m_Name: PlayerFSM
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.StateMachines.FSM","nodes":[{"_actionList":{"executionMode":1,"actions":[{"animationComponent":{"_name":"AnimationComponent","_targetVariableID":"d630a60a-a5c9-4d57-bcc9-44169d7b530e"},"$type":"AnimationAction"}]},"_position":{"x":420.0,"y":220.0},"$type":"NodeCanvas.StateMachines.ActionState","$id":"0"},{"_actionList":{"executionMode":1,"actions":[{"navMeshMove":{"_name":"NavMeshMove","_targetVariableID":"f240aebe-2310-41c6-ae1c-4f1c8f1b49d4"},"transform":{"_name":"Transform","_targetVariableID":"af53cf67-81f8-4049-bb2a-c0524c2bcc82"},"moveSpeed":{"_name":"MoveSpeed","_targetVariableID":"5892392e-b4f6-4840-a215-f654f17ab428"},"moveDirection":{"_name":"joystickDirection","_targetVariableID":"36cb4c99-a516-41d9-84e9-179459715f8d"},"$type":"PlayerMoveAction"}]},"_position":{"x":580.0,"y":320.0},"$type":"NodeCanvas.StateMachines.ActionState","$id":"1"},{"_actionList":{"executionMode":1,"actions":[{"log":{"_value":"touch
+    up"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"}]},"_position":{"x":400.0,"y":440.0},"$type":"NodeCanvas.StateMachines.ActionState"}],"connections":[{"_condition":{"inputActionAsset":1,"selectedActionID":"e24356e6-d990-422d-9734-28cf79a2f2b6","$type":"NodeCanvas.Tasks.Conditions.CheckActionInput"},"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.StateMachines.FSMConnection"},{"_condition":{"inputActionAsset":1,"pressType":1,"selectedActionID":"e24356e6-d990-422d-9734-28cf79a2f2b6","$type":"NodeCanvas.Tasks.Conditions.CheckActionInput"},"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"0"},"$type":"NodeCanvas.StateMachines.FSMConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _objectReferences:
+  - {fileID: 0}
+  - {fileID: -944628639613478452, guid: 64503c265fb166f4da1b93844eb63006, type: 3}
+  _graphSource:
+    _version: 3.25
+    _category: 
+    _comments: 
+    _translation: {x: -39.999996, y: -31.999998}
+    _zoomFactor: 0.9801634
+  _haltSerialization: 0

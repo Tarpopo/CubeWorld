@@ -1,28 +1,15 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(NavMeshAgent))]
 public abstract class BaseUnit : MonoBehaviour
 {
-    [SerializeField, TabGroup("Refs")] protected AnimationComponent _animationComponent;
-    [SerializeField, TabGroup("Refs")] protected NavMeshMove _navMeshMove;
-
-    // protected StateMachine _stateMachine;
-    // protected IMove _move;
-    // protected IRotateMove _rotateMove;
-    // protected AnimationComponent _animationComponent;
-
-
-    protected virtual void Start()
-    {
-        // _stateMachine = new StateMachine();
-        // _move = GetComponent<IMove>();
-        // _rotateMove = GetComponent<IRotateMove>();
-        // _animationComponent = GetComponent<AnimationComponent>();
-    }
-
-    // private void Update() => _stateMachine.CurrentState.LogicUpdate();
-    //
-    // private void FixedUpdate() => _stateMachine.CurrentState.PhysicsUpdate();
+    public NavMeshMove NavMeshMove { get; protected set; }
+    public AnimationComponent AnimationComponent => _animationComponent;
+    [SerializeField] protected AnimationComponent _animationComponent;
+    protected virtual void Awake() => NavMeshMove = new NavMeshMove(GetComponent<NavMeshAgent>());
 }

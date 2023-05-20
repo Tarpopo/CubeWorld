@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(TransformRotate))]
-[RequireComponent(typeof(AnimationComponent))]
-[RequireComponent(typeof(NavMeshMove))]
 public class Player : BaseUnit, IResourceContainer
 {
     public event Action<ResourceType> OnRemoveResource;
     public Transform ContainPoint => _resourceCollector.CollectPoint;
-
+    public float MoveSpeed => _playerData.MoveSpeed;
+    public Vector2 JoystickDirection => _joyStick.JoystickDirection;
+    [SerializeField] private JoyStick _joyStick;
     [SerializeField] private PlayerData _playerData;
-    [SerializeField] private float _angleOffset = 140;
     private PlayerInput _playerInput;
     private TriggerChecker<IResourcePoint> _resourceChecker;
     private ResourcesUISetter _resourcesUISetter;
@@ -37,7 +34,7 @@ public class Player : BaseUnit, IResourceContainer
         return true;
     }
 
-    protected override void Start()
+    private void Start()
     {
         // Application.targetFrameRate = 60;
         // base.Start();
@@ -71,9 +68,9 @@ public class Player : BaseUnit, IResourceContainer
         // _stateMachine.Initialize<Idle>();
     }
 
-    private void OnTriggerEnter(Collider other) => _resourceChecker.OnTriggerEnter(other);
-
-    private void OnTriggerStay(Collider other) => _resourceChecker.OnTriggerStay(other);
-
-    private void OnTriggerExit(Collider other) => _resourceChecker.OnTriggerExit(other);
+    // private void OnTriggerEnter(Collider other) => _resourceChecker.OnTriggerEnter(other);
+    //
+    // private void OnTriggerStay(Collider other) => _resourceChecker.OnTriggerStay(other);
+    //
+    // private void OnTriggerExit(Collider other) => _resourceChecker.OnTriggerExit(other);
 }

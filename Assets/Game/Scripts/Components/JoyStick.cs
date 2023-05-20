@@ -3,48 +3,65 @@ using UnityEngine.EventSystems;
 
 public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    public Vector2 JoystickDirection { get; private set; }
+    [SerializeField] private OnRoll _onRollEvent;
+    [SerializeField] private JoystickSO _joystickSo;
     [SerializeField] private RectTransform _canvas;
-    [SerializeField] private Camera _camera;
-    [SerializeField] private PlayerInput _playerInput;
-    [SerializeField] private RectTransform _outsideCicle;
-    [SerializeField] private RectTransform _insideCicle;
+    [SerializeField] private RectTransform _outsideCircle;
+    [SerializeField] private RectTransform _insideCircle;
+    [SerializeField] private RectTransform _arrowTransform;
+    [SerializeField] private GameObject _cicle;
+    [SerializeField] private GameObject _arrow;
+    private Vector2 _startPosition;
 
-    [SerializeField] private float _radiusInsideCicle = 50;
-    private bool _isActive;
+    private void Start() => DisableJoystick();
 
-    private void Start()
+    private void EnableJoystick() => _outsideCircle.gameObject.SetActive(true);
+
+    private void DisableJoystick()
     {
-        _camera = Camera.main;
-        SetActive(false);
+        _outsideCircle.gameObject.SetActive(false);
+        ResetPositions();
     }
 
-    private void SetActive(bool isActive)
+    private void ResetPositions() => _insideCircle.localPosition = Vector3.zero;
+
+    public void OnPointerDown(PointerEventData eventData)
     {
-        _isActive = isActive;
-        _outsideCicle.gameObject.SetActive(_isActive);
-        if (_isActive)
-        {
-            _outsideCicle.localPosition = GetScreenPoint();
-        }
-        else
-        {
-            ResetPositions();
-        }
+        EnableJoystick();
+        _outsideCircle.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
+        _startPosition = eventData.position;
+        SetActiveInside(true);
     }
 
-    private Vector2 GetScreenPoint()
+    public void OnPointerUp(PointerEventData eventData)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas, Input.mousePosition, _camera,
-            out var position);
-        return position;
+        if ((eventData.position - _startPosition).magnitude > _joystickSo.RadiusInsideCircle) _onRollEvent.Invoke();
+        DisableJoystick();
     }
 
-    private void ResetPositions() => _insideCicle.localPosition = Vector3.zero;
+    public void OnDrag(PointerEventData eventData)
+    {
+        JoystickDirection = eventData.position - _startPosition;
+        var magnitude = JoystickDirection.magnitude;
+        var position = JoystickDirection.normalized * Mathf.Clamp(magnitude, 0, _joystickSo.RadiusInsideCircle);
+        _insideCircle.anchoredPosition = position;
+        _arrowTransform.anchoredPosition = position;
+        SetActiveInside(magnitude < _joystickSo.RadiusInsideCircle);
+        SetArrowRotate(JoystickDirection.normalized);
+    }
 
-    public void OnPointerDown(PointerEventData eventData) => SetActive(true);
+    private void SetActiveInside(bool touchInside)
+    {
+        _cicle.SetActive(touchInside);
+        _arrow.SetActive(!touchInside);
+    }
 
-    public void OnPointerUp(PointerEventData eventData) => SetActive(false);
+    private void SetArrowRotate(Vector2 direction) => _arrowTransform.right = direction;
 
-    public void OnDrag(PointerEventData eventData) => _insideCicle.localPosition =
-        _playerInput.MoveDirection.normalized * Mathf.Clamp(_playerInput.Distance, 0, _radiusInsideCicle);
+    private Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition) =>
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas, screenPosition, Helpers.Camera,
+            out var localPoint)
+            ? localPoint
+            : Vector2.zero;
 }

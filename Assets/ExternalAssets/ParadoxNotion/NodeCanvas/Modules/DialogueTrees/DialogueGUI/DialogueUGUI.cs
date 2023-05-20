@@ -51,13 +51,14 @@ namespace NodeCanvas.DialogueTrees.UI.Examples
         bool anyKeyDown {
             get
             {
-#if ENABLE_LEGACY_INPUT_MANAGER
                 return Input.anyKeyDown;
-#elif ENABLE_INPUT_SYSTEM
-                return UnityEngine.InputSystem.Keyboard.current.anyKey.wasPressedThisFrame || UnityEngine.InputSystem.Mouse.current.leftButton.wasPressedThisFrame;
-#else
-                return Input.anyKeyDown;
-#endif
+// #if ENABLE_LEGACY_INPUT_MANAGER
+//                 return Input.anyKeyDown;
+// #elif ENABLE_INPUT_SYSTEM
+//                 return UnityEngine.InputSystem.Keyboard.current.anyKey.wasPressedThisFrame || UnityEngine.InputSystem.Mouse.current.leftButton.wasPressedThisFrame;
+// #else
+//                 return Input.anyKeyDown;
+// #endif
             }
         }
 

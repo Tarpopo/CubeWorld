@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a92f29ec8c07c840bb9eb5de8ca7bbf, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  MoveSpeed: 0.1
+  MoveSpeed: 5
   ResourceTakeDelay: 0.25
   ResourceCheckRadius: 2.2

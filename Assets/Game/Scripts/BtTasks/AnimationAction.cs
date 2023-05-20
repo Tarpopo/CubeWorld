@@ -3,15 +3,16 @@ using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
 
-public class AnimationAction : ActionTask<AnimationComponent>
+public class AnimationAction : ActionTask
 {
+    public BBParameter<AnimationComponent> animationComponent;
     [SerializeField] private string _animation = string.Empty;
 
     protected override string info => $"{_animation} Animation";
 
     protected override void OnExecute()
     {
-        agent.PlayAnimation(_animation);
+        animationComponent.value.PlayAnimation(_animation);
         EndAction(true);
     }
 
@@ -19,10 +20,11 @@ public class AnimationAction : ActionTask<AnimationComponent>
     protected override void OnTaskInspectorGUI()
     {
         base.OnTaskInspectorGUI();
-        if (agent.Animations != null && GUILayout.Button("SelectEnum"))
+        if (animationComponent.value != null && animationComponent.value.Animations != null &&
+            GUILayout.Button("SelectEnum"))
         {
             var menu = new UnityEditor.GenericMenu();
-            foreach (var animation in Enum.GetNames(agent.Animations.GetType()))
+            foreach (var animation in Enum.GetNames(animationComponent.value.Animations.GetType()))
             {
                 menu.AddItem(new GUIContent(animation), _animation.Equals(animation), () =>
                 {
